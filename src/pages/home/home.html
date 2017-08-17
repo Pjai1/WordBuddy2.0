@@ -8,11 +8,66 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <!-- <h3>Ionic Menu Starter</h3>
 
   <p class="test">
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way. Really?
-  </p>
+  </p> -->
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <button ion-button outline>Record</button><button ion-button outline>Talk</button>
+
+  <h3>Record a Message</h3>
+  <p>Select the language you're recording and press Record</p>
+  <ion-list class="bottom-margin">
+    <ion-item>
+      <ion-label floating>Recorded Text Here</ion-label>
+      <ion-input type="text" disabled></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list class="language-select">
+    <ion-item>
+      <ion-label>Language to Record</ion-label>
+      <ion-select [(ngModel)]="languageRecorded">
+        <ion-option value="en-GB">English (UK)</ion-option>
+        <ion-option value="en-US">English (US)</ion-option>
+        <ion-option value="nl-BE">Dutch (Belgium)</ion-option>
+        <ion-option value="it-IT">Italian (Italy)</ion-option>
+        <ion-option value="fr-FR">French (France)</ion-option>
+        <ion-option value="de-DE">German (Germany)</ion-option>
+        <ion-option value="es-ES">Spanish</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list><button ion-button (click)="record();">Record</button>
+
+  <h3>Speak a Message</h3>
+  <p>Select the language you want to be spoken and press Talk</p>
+  <ion-card>
+    <ion-card-content *ngFor="let s of speech">
+      <p>{{s}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Text To Speak Here</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Language to Talk</ion-label>
+      <ion-select [(ngModel)]="languageRecorded">
+        <ion-option value="en-GB">English (UK)</ion-option>
+        <ion-option value="en-US">English (US)</ion-option>
+        <ion-option value="nl-BE">Dutch (Belgium)</ion-option>
+        <ion-option value="it-IT">Italian (Italy)</ion-option>
+        <ion-option value="fr-FR">French (France)</ion-option>
+        <ion-option value="de-DE">German (Germany)</ion-option>
+        <ion-option value="es-ES">Spanish</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list><button ion-button (click)="talk();">Talk</button>
+
+  <!-- <button ion-button secondary menuToggle>Toggle Menu</button> -->
 </ion-content>
