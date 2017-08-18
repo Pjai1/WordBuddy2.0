@@ -8,6 +8,31 @@
 </ion-header>
 
 <ion-content padding>
-    <p>This is the dictionary</p>
+    <p class="p-bot-margin">Welcome to the dictionary page, on this page you can find a number of <b>basic words</b> and <b>sentences</b> for you to use in the country you're staying in.</p>
+    <h3>Pocket Dictionary</h3>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-6>
+            <ion-list>
+                <ion-list-header>
+                    <b>Native List</b>
+                </ion-list-header>
+                <ion-item *ngFor="let n of nativeList">
+                    <h2>{{n}}</h2>
+                </ion-item>
+            </ion-list>    
+            </ion-col>
+            <ion-col col-6>
+            <ion-list>
+                <ion-list-header>
+                    <b>Translated List</b>
+                </ion-list-header>
+                <ion-item *ngFor="let t of translations">
+                    <h2>{{t}}</h2>
+                </ion-item>
+            </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
 

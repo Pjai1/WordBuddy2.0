@@ -9,6 +9,8 @@ import { GlobalVars } from '../../services/globals.service';
 export class SettingsPage implements OnInit{
     nativeLang: string;
     nativeText: string;
+    foreignLang: string;
+    foreignText: string;
     firstNameText: string;
     firstName: string;
     firstNameSet: boolean = false;
@@ -26,31 +28,48 @@ export class SettingsPage implements OnInit{
         }
 
        if (this.globalVar.getNativeLanguage() === "") {
-            this.nativeText = "No Current Native Language Set";
+            this.nativeText = "No Native Language Set";
         } else {
             this.nativeText = this.globalVar.getNativeLanguage();
+        }
+
+        if (this.globalVar.getRecordedLanguage() === "") {
+            this.foreignText = "No Foreign Language Set";
+        } else {
+            this.foreignText = this.globalVar.getNativeLanguage();
         }
     }
 
     setNative() {
         let toast = this.toast.create({
-        message: "Language set, let's commence!",
+        message: "Native Language set, let's commence!",
         duration: 3000,
-        position: 'top'
+        position: 'middle'
         })
         this.globalVar.setNativeLanguage(this.nativeLang);
-        this.nativeText = "Current Native Language: " + this.globalVar.getNativeLanguage();
+        this.nativeText = "Native Language: " + this.globalVar.getNativeLanguage();
+        toast.present();
+    }
+
+    setForeign() {
+        let toast = this.toast.create({
+        message: "Foreign Language set, let's commence!",
+        duration: 3000,
+        position: 'middle'
+        })
+        this.globalVar.setRecordedLanguage(this.foreignLang);
+        this.foreignText = "Foreign Language: " + this.globalVar.getRecordedLanguage();
         toast.present();
     }
 
     setFirstName() {
         this.globalVar.setFirstName(this.firstName);
-        this.firstNameText = "Your First Name: " + this.globalVar.getFirstName();
+        this.firstNameText = "First Name: " + this.globalVar.getFirstName();
         this.firstNameSet = true;
         let toast = this.toast.create({
         message: "Welcome " + this.globalVar.getFirstName(),
         duration: 3000,
-        position: 'top'
+        position: 'middle'
         })
         toast.present();
     }

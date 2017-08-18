@@ -15,7 +15,7 @@
             <ion-label floating>Your firstname</ion-label>
             <ion-input type="text" [(ngModel)]="firstName"></ion-input>
         </ion-item>
-    </ion-list><button *ngIf="!firstNameSet" ion-button (click)="setFirstName()">Confirm</button>
+    </ion-list><button class="button" *ngIf="!firstNameSet" ion-button (click)="setFirstName()">Confirm</button>
 
     <h3 [innerHTML]="nativeText"></h3>
     <ion-list>
@@ -29,8 +29,24 @@
             <ion-option value="fr-FR">French (France)</ion-option>
             <ion-option value="de-DE">German (Germany)</ion-option>
             <ion-option value="es-ES">Spanish</ion-option>
+        </ion-select> 
+        </ion-item>
+    </ion-list><button class="button" ion-button (click)="setNative()">Confirm</button>
+
+    <h3 [innerHTML]="foreignText"></h3>
+    <ion-list>
+        <ion-item>
+        <ion-label>Foreign Language</ion-label>
+        <ion-select [(ngModel)]="foreignLang">
+            <ion-option value="en-GB">English (UK)</ion-option>
+            <ion-option value="en-US">English (US)</ion-option>
+            <ion-option value="nl-BE">Dutch (Belgium)</ion-option>
+            <ion-option value="it-IT">Italian (Italy)</ion-option>
+            <ion-option value="fr-FR">French (France)</ion-option>
+            <ion-option value="de-DE">German (Germany)</ion-option>
+            <ion-option value="es-ES">Spanish</ion-option>
         </ion-select>
         </ion-item>
-    </ion-list><button ion-button (click)="setNative()">Confirm</button>
+    </ion-list><button class="button" ion-button (click)="setForeign()">Confirm</button>
 </ion-content>
 
