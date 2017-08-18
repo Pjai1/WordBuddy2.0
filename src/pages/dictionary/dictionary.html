@@ -9,8 +9,9 @@
 
 <ion-content padding>
     <p class="p-bot-margin">Welcome to the dictionary page, on this page you can find a number of <b>basic words</b> and <b>sentences</b> for you to use in the country you're staying in.</p>
+    <p class="p-bot-margin">You can click on <b>text</b> in the <b>translated list</b> to copy it down below in the textbox and output it.</p> 
     <h3>Pocket Dictionary</h3>
-    <ion-grid>
+    <ion-grid *ngIf="nativeSet && foreignSet">
         <ion-row>
             <ion-col col-6>
             <ion-list>
@@ -18,21 +19,30 @@
                     <b>Native List</b>
                 </ion-list-header>
                 <ion-item *ngFor="let n of nativeList">
-                    <h2>{{n}}</h2>
+                    <h2 text-wrap>{{n}}</h2>
                 </ion-item>
             </ion-list>    
             </ion-col>
             <ion-col col-6>
             <ion-list>
-                <ion-list-header>
+                <ion-list-header> 
                     <b>Translated List</b>
                 </ion-list-header>
                 <ion-item *ngFor="let t of translations">
-                    <h2>{{t}}</h2>
+                    <a id="{{t}}" (click)="speak($event)">    
+                        <h2 id="{{t}}" text-wrap>{{t}}</h2>
+                    </a>
                 </ion-item>
             </ion-list>
             </ion-col>
         </ion-row>
     </ion-grid>
+    <p *ngIf="!foreignSet || !nativeSet"><em>Seems like you forgot to set your native language and/or the language of the country you're currently residing in, please check it out in the Settings tab.</em></p>
+    <ion-list>
+        <ion-item>
+            <ion-label floating>Text to Speak</ion-label>
+            <ion-input id="speakBox" type="text" [(ngModel)]="textBoxVal"></ion-input>
+        </ion-item>
+    </ion-list><button ion-button (click)="talk()">Speak</button>
 </ion-content>
 
