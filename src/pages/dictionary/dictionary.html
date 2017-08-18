@@ -38,11 +38,11 @@
         </ion-row>
     </ion-grid>
     <p *ngIf="!foreignSet || !nativeSet"><em>Seems like you forgot to set your native language and/or the language of the country you're currently residing in, please check it out in the Settings tab.</em></p>
-    <ion-list>
+    <ion-list *ngIf="nativeSet && foreignSet">
         <ion-item>
             <ion-label floating>Text to Speak</ion-label>
             <ion-input id="speakBox" type="text" [(ngModel)]="textBoxVal"></ion-input>
         </ion-item>
-    </ion-list><button ion-button (click)="talk()">Speak</button>
+    </ion-list><button *ngIf="nativeSet && foreignSet" ion-button (click)="talk()">Speak</button>
 </ion-content>
 

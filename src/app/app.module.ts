@@ -15,6 +15,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TextToSpeech,
     SpeechRecognition,
-    GlobalVars
+    GlobalVars,
+    Geolocation
   ]
 })
 export class AppModule {}

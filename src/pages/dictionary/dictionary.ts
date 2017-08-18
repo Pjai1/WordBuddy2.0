@@ -26,13 +26,13 @@ export class DictionaryPage implements OnInit {
     }
 
     ngOnInit() {
-        if(this.globalVar.getNativeLanguage() !== "" && this.globalVar.getRecordedLanguage() !== "") {
-            let loader = this.loader.create({
-                content: "Building the dictionary",
-                duration: 3000
-            })
-            loader.present()
-        }
+        // if(this.globalVar.getNativeLanguage() !== "" && this.globalVar.getRecordedLanguage() !== "") {
+        //     let loader = this.loader.create({
+        //         content: "Building the dictionary",
+        //         duration: 3000
+        //     })
+        //     loader.present()
+        // }
 
         if(this.globalVar.getNativeLanguage() !== "") {
             this.nativeSet = true;
@@ -44,38 +44,40 @@ export class DictionaryPage implements OnInit {
             this.recordedLanguage = this.globalVar.getRecordedLanguage();
         }  
 
-        let headers = new Headers({'Content-Type': 'application/json'})
-        let options = new RequestOptions({headers: headers})
-        let bodyNative = {
-          key: this.apiKey,
-          lang: this.standardLanguage + '-' + this.nativeLanguage.substring(0,2),
-          text: this.nativeList
-        }
-    
-    
-        let urlNative = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${bodyNative.key}&lang=${bodyNative.lang}&text=${bodyNative.text}`;
-        
-        this.http.get(urlNative).map(res => res.json()).subscribe(data => {
-            let dataArray = data.text[0]
-            let splitArray = new Array()
-            splitArray = dataArray.split(",")
-            this.nativeList = splitArray;
-        })
-
-        let bodyForeign = {
+        if(this.globalVar.getRecordedLanguage() !== "" && this.globalVar.getNativeLanguage() !== "") {
+            let headers = new Headers({'Content-Type': 'application/json'})
+            let options = new RequestOptions({headers: headers})
+            let bodyNative = {
             key: this.apiKey,
-            lang: this.nativeLanguage.substring(0,2) + '-' + this.recordedLanguage.substring(0,2),
+            lang: this.standardLanguage + '-' + this.nativeLanguage.substring(0,2),
             text: this.nativeList
-        }
-    
-        let urlForeign = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${bodyForeign.key}&lang=${bodyForeign.lang}&text=${bodyForeign.text}`;
+            }
         
-        this.http.get(urlForeign).map(res => res.json()).subscribe(data => {
-            let dataArray = data.text[0]
-            let splitArray = new Array()
-            splitArray = dataArray.split(",")
-            this.translations = splitArray;
-        })
+        
+            let urlNative = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${bodyNative.key}&lang=${bodyNative.lang}&text=${bodyNative.text}`;
+            
+            this.http.get(urlNative).map(res => res.json()).subscribe(data => {
+                let dataArray = data.text[0]
+                let splitArray = new Array()
+                splitArray = dataArray.split(",")
+                this.nativeList = splitArray;
+            })
+
+            let bodyForeign = {
+                key: this.apiKey,
+                lang: this.nativeLanguage.substring(0,2) + '-' + this.recordedLanguage.substring(0,2),
+                text: this.nativeList
+            }
+        
+            let urlForeign = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${bodyForeign.key}&lang=${bodyForeign.lang}&text=${bodyForeign.text}`;
+            
+            this.http.get(urlForeign).map(res => res.json()).subscribe(data => {
+                let dataArray = data.text[0]
+                let splitArray = new Array()
+                splitArray = dataArray.split(",")
+                this.translations = splitArray;
+            })
+        }
     }
 
     speak(event) {
