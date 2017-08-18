@@ -8,30 +8,72 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button outline [ngClass]="{'activated-button': recordIsActive}" (click)="activateRecord()">Record</button><button ion-button outline [ngClass]="{'activated-button': talkIsActive}" (click)="activateTalk()">Talk</button>
-  <p *ngIf="!recordIsActive && !talkIsActive">Select an option to get started</p>
-  <div class="margin-top-bot" *ngIf="recordIsActive">
-    <h3>Record a Message</h3>
-    <p *ngIf="!isRecorded">Press Record</p>
-    <p *ngIf="isRecorded">Select the correct recording</p>
+  <div *ngIf="isNativeSet">
+    <button ion-button outline icon-left [ngClass]="{'activated-button': recordIsActive}" (click)="activateRecord()"><ion-icon name="ios-recording"></ion-icon>Record</button><button ion-button outline [ngClass]="{'activated-button': talkIsActive}" (click)="activateTalk()" icon-left><ion-icon md="md-volume-up"></ion-icon>Talk</button>
+    <div *ngIf="!recordIsActive && !talkIsActive">  
+      <p>Welcome to WordBuddy's HomePage, on this page you can do <em>multiple</em> things.</p>
+      <ion-list class="to-do-margin">
+          <ion-list-header class="no-border">
+            <h1>What can I do?</h1>
+          </ion-list-header>
+          <ion-item><b>Record</b> someone's voice</ion-item>
+          <ion-item><b>Translate</b> recordings</ion-item>
+          <ion-item><b>Translate</b> your own inputted messages</ion-item>
+          <ion-item><b>Text-to-speech</b> words or sentences</ion-item>
+          <ion-item>Try it! Click <b>Record</b> or <b>Talk!</b></ion-item>
+        </ion-list>
+    </div>
+    <div class="margin-top-bot" *ngIf="recordIsActive">
+      <h3>Record a Message</h3>
+      <p *ngIf="speech?.length == 0">Press Record to start recording</p>
+      <p *ngIf="speech?.length > 0">Select the correct recording to translate</p>
 
-    <ion-card *ngFor="let s of speech">
-      <ion-card-content id="{{s}}" (click)="clickToTranslate($event)">
-        {{s}}
-      </ion-card-content>
-    </ion-card>
+      <div *ngIf="speech?.length > 0">
+        <ion-card *ngFor="let s of speech">
+          <ion-card-content id="{{s}}" (click)="clickToTranslateSpeech($event)">
+            {{s}}
+          </ion-card-content>
+        </ion-card>
+      </div>
 
-    <ion-list *ngIf="translateIsActive" class="bottom-margin">
+      <ion-list *ngIf="translateIsActive && speech?.length > 0" class="bottom-margin">
+        <ion-item>
+          <ion-label floating>{{placeholderText}}</ion-label>
+          <ion-input type="text" value="{{translateValue}}"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngIf="translateIsActive && recordLanguageSelect" class="language-select">
+        <ion-item>
+          <ion-label>Language to Translate</ion-label>
+          <ion-select [(ngModel)]="languageRecorded">
+            <ion-option value="en-GB">English (UK)</ion-option>
+            <ion-option value="en-US">English (US)</ion-option>
+            <ion-option value="nl-BE">Dutch (Belgium)</ion-option>
+            <ion-option value="it-IT">Italian (Italy)</ion-option>
+            <ion-option value="fr-FR">French (France)</ion-option>
+            <ion-option value="de-DE">German (Germany)</ion-option>
+            <ion-option value="es-ES">Spanish</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list><button *ngIf="translateIsActive" ion-button (click)="translateRecord()">Translate</button><button ion-button (click)="record()">Record</button>
+      <hr>
+  </div>
+
+  <div class="margin-top-bot" *ngIf="talkIsActive">
+    <h3>Speak a Message</h3>
+    <p>If you would first like to translate, select the language you want to translate to. Otherwise select the language to be spoken.</p>
+    <ion-list>
       <ion-item>
-        <ion-label floating>{{placeholderText}}</ion-label>
-        <ion-input type="text" value="{{translateValue}}"></ion-input>
+        <ion-label floating>Text To Speak/Translate Here</ion-label>
+        <ion-input type="text" [(ngModel)]="translateValueTalk"></ion-input>
       </ion-item>
     </ion-list>
 
-    <ion-list *ngIf="translateIsActive && recordLanguageSelect" class="language-select">
+    <ion-list>
       <ion-item>
-        <ion-label>Language to Translate</ion-label>
-        <ion-select [(ngModel)]="languageRecorded">
+        <ion-label>Language to Speak/Translate</ion-label>
+        <ion-select [(ngModel)]="languageSpoken">
           <ion-option value="en-GB">English (UK)</ion-option>
           <ion-option value="en-US">English (US)</ion-option>
           <ion-option value="nl-BE">Dutch (Belgium)</ion-option>
@@ -41,24 +83,15 @@
           <ion-option value="es-ES">Spanish</ion-option>
         </ion-select>
       </ion-item>
-    </ion-list><button *ngIf="translateIsActive" ion-button (click)="translate()">Translate</button><button ion-button (click)="record()">Record</button>
-    <hr>
+    </ion-list><button ion-button (click)="translateTalk()">Translate</button><button ion-button (click)="talk()">Talk</button>
+  </div>
 </div>
-
-<div class="margin-top-bot" *ngIf="talkIsActive">
-  <h3>Speak a Message</h3>
-  <p>Select the language you want to be spoken and press Talk</p>
+<div *ngIf="!isNativeSet">
+  <p>Seems like you haven't set your <b>native language</b> yet, please use the dropdown to select it so we can get going!</p>
   <ion-list>
     <ion-item>
-      <ion-label floating>Text To Speak Here</ion-label>
-      <ion-input type="text" [(ngModel)]="translateValueTwo"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <ion-list>
-    <ion-item>
-      <ion-label>Language to Talk</ion-label>
-      <ion-select [(ngModel)]="languageSpoken">
+      <ion-label>Native Language</ion-label>
+      <ion-select [(ngModel)]="nativeLanguage">
         <ion-option value="en-GB">English (UK)</ion-option>
         <ion-option value="en-US">English (US)</ion-option>
         <ion-option value="nl-BE">Dutch (Belgium)</ion-option>
@@ -68,7 +101,6 @@
         <ion-option value="es-ES">Spanish</ion-option>
       </ion-select>
     </ion-item>
-  </ion-list><button ion-button (click)="talk()">Talk</button>
+  </ion-list><button ion-button (click)="setNative()">Confirm</button>
 </div>
-
 </ion-content>

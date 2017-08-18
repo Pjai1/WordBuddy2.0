@@ -9,6 +9,8 @@ import { DictionaryPage } from '../pages/dictionary/dictionary';
 import { DirectionsPage } from '../pages/directions/directions';
 import { SettingsPage } from '../pages/settings/settings';
 
+import { GlobalVars } from '../services/globals.service';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
@@ -41,6 +43,7 @@ import { SpeechRecognition } from '@ionic-native/speech-recognition';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TextToSpeech,
     SpeechRecognition,
+    GlobalVars
   ]
 })
 export class AppModule {}
