@@ -57,7 +57,7 @@ export class HomePage implements OnInit {
     let toast = this.toast.create({
       message: "Language set, let's commence!",
       duration: 4000,
-      position: 'top'
+      position: 'bottom'
     })
     this.globalVar.setNativeLanguage(this.nativeLanguage);
     this.nativeLanguage = this.globalVar.getNativeLanguage();
@@ -84,7 +84,7 @@ export class HomePage implements OnInit {
     let toast = this.toast.create({
       message: "Translation successful, hopefully you'll understand better now!",
       duration: 4000,
-      position: 'top'
+      position: 'bottom'
     })
     let headers = new Headers({'Content-Type': 'application/json'})
     let options = new RequestOptions({headers: headers})

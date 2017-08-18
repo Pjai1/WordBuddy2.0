@@ -44,7 +44,7 @@ export class SettingsPage implements OnInit{
         let toast = this.toast.create({
         message: "Native Language set, let's commence!",
         duration: 3000,
-        position: 'middle'
+        position: 'bottom'
         })
         this.globalVar.setNativeLanguage(this.nativeLang);
         this.nativeText = "Native Language: " + this.globalVar.getNativeLanguage();
@@ -55,7 +55,7 @@ export class SettingsPage implements OnInit{
         let toast = this.toast.create({
         message: "Foreign Language set, let's commence!",
         duration: 3000,
-        position: 'middle'
+        position: 'bottom'
         })
         this.globalVar.setRecordedLanguage(this.foreignLang);
         this.foreignText = "Foreign Language: " + this.globalVar.getRecordedLanguage();
