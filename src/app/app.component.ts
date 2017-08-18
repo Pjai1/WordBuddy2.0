@@ -45,4 +45,18 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  selectIcon(page) {
+    if (page.title === "Home")
+      return "md-home"
+
+    if (page.title === "Settings")
+      return "md-cog"
+
+    if (page.title === "Dictionary")
+      return "md-book"
+
+    if (page.title === "Directions")
+      return "md-map"
+  }
 }
