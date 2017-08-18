@@ -32,6 +32,7 @@ export class HomePage implements OnInit {
   apiKey: string;
   nativeLanguage: string;
   placeholderText: string;
+  firstName: string;
 
   constructor(public globalVar:GlobalVars, public toast: ToastController, public platform: Platform, public navCtrl: NavController, public http: Http, private speechRecognition: SpeechRecognition, private tts: TextToSpeech) {
 
@@ -45,6 +46,10 @@ export class HomePage implements OnInit {
     } else {
       this.nativeLanguage = this.globalVar.getNativeLanguage() ;
       this.isNativeSet = true;
+    }
+
+    if (this.globalVar.getFirstName()) {
+      this.firstName = this.globalVar.getFirstName();
     }
   }
 

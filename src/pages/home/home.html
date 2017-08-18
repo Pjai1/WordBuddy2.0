@@ -11,7 +11,7 @@
   <div *ngIf="isNativeSet">
     <button ion-button outline icon-left [ngClass]="{'activated-button': recordIsActive}" (click)="activateRecord()"><ion-icon name="ios-recording"></ion-icon>Record</button><button ion-button outline [ngClass]="{'activated-button': talkIsActive}" (click)="activateTalk()" icon-left><ion-icon md="md-volume-up"></ion-icon>Talk</button>
     <div *ngIf="!recordIsActive && !talkIsActive">  
-      <p>Welcome to WordBuddy's HomePage, on this page you can do <em>multiple</em> things.</p>
+      <p>Welcome <span *ngIf="firstName?.length > 0">{{firstName}}, </span>to WordBuddy's HomePage, on this page you can do <em>multiple</em> things.</p>
       <ion-list class="to-do-margin">
           <ion-list-header class="no-border">
             <h1>What can I do?</h1>

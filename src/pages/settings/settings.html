@@ -8,6 +8,29 @@
 </ion-header>
 
 <ion-content padding>
-    <p>This is the settings page</p>
+    <p class="p-bot-margin">Welcome to the settings page, on this page you can change a couple personal settings.</p>
+    <h3 [innerHTML]="firstNameText"></h3>
+    <ion-list *ngIf="!firstNameSet">
+        <ion-item>
+            <ion-label floating>Your firstname</ion-label>
+            <ion-input type="text" [(ngModel)]="firstName"></ion-input>
+        </ion-item>
+    </ion-list><button *ngIf="!firstNameSet" ion-button (click)="setFirstName()">Confirm</button>
+
+    <h3 [innerHTML]="nativeText"></h3>
+    <ion-list>
+        <ion-item>
+        <ion-label>Native Language</ion-label>
+        <ion-select [(ngModel)]="nativeLang">
+            <ion-option value="en-GB">English (UK)</ion-option>
+            <ion-option value="en-US">English (US)</ion-option>
+            <ion-option value="nl-BE">Dutch (Belgium)</ion-option>
+            <ion-option value="it-IT">Italian (Italy)</ion-option>
+            <ion-option value="fr-FR">French (France)</ion-option>
+            <ion-option value="de-DE">German (Germany)</ion-option>
+            <ion-option value="es-ES">Spanish</ion-option>
+        </ion-select>
+        </ion-item>
+    </ion-list><button ion-button (click)="setNative()">Confirm</button>
 </ion-content>
 
