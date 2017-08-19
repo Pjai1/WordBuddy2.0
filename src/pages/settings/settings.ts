@@ -36,7 +36,7 @@ export class SettingsPage implements OnInit{
         if (this.globalVar.getRecordedLanguage() === "") {
             this.foreignText = "No Foreign Language Set";
         } else {
-            this.foreignText = this.globalVar.getNativeLanguage();
+            this.foreignText = this.globalVar.getRecordedLanguage();
         }
     }
 
@@ -69,7 +69,7 @@ export class SettingsPage implements OnInit{
         let toast = this.toast.create({
         message: "Welcome " + this.globalVar.getFirstName(),
         duration: 3000,
-        position: 'middle'
+        position: 'bottom'
         })
         toast.present();
     }
