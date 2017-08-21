@@ -9,7 +9,7 @@
 
 <ion-content padding>
     <p>Welcome to the dictionary page, on this page you can find a number of <b>basic words</b> and <b>sentences</b> for you to use in the country you're staying in.</p>
-    <p class="p-bot-margin">You can click on <b>text</b> in the <b>translated list</b> to copy it down below in the textbox and output it.</p> 
+    <p class="p-bot-margin">You can click on <b>text</b> in the <b>translated list</b> to <b>copy</b> it down below in the textbox and output it.</p> 
     <h3>Pocket Dictionary</h3>
     <ion-grid *ngIf="nativeSet && foreignSet">
         <ion-row>
@@ -26,10 +26,10 @@
             <ion-col col-6>
             <ion-list>
                 <ion-list-header> 
-                    <b>Translated List (clickable)</b>
+                    <b>Translated List</b>
                 </ion-list-header>
                 <ion-item *ngFor="let t of translations">
-                    <a id="{{t}}" (click)="speak($event)">    
+                    <a style="color: blue; text-decoration: underline" id="{{t}}" (click)="speak($event)">    
                         <h2 id="{{t}}" text-wrap>{{t}}</h2>
                     </a>
                 </ion-item>
@@ -37,7 +37,7 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-    <p *ngIf="!foreignSet || !nativeSet"><em>Seems like you forgot to set your native language and/or the language of the country you're currently residing in, please check it out in the Settings tab.</em></p>
+    <p *ngIf="!foreignSet || !nativeSet"><em>Seems like you forgot to <b>set</b> your <b>native language</b> and/or the language of the country you're currently residing in, please check it out in the <b>Settings</b> tab.</em></p>
     <ion-list *ngIf="nativeSet && foreignSet">
         <ion-item>
             <ion-label floating>Text to Speak</ion-label>

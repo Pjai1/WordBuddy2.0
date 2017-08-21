@@ -86,8 +86,7 @@ export class HomePage implements OnInit {
       duration: 4000,
       position: 'bottom'
     })
-    let headers = new Headers({'Content-Type': 'application/json'})
-    let options = new RequestOptions({headers: headers})
+
     let body = {
       key: this.apiKey,
       lang: this.languageRecorded.substring(0,2) + '-' + this.nativeLanguage.substring(0,2),
@@ -112,15 +111,17 @@ export class HomePage implements OnInit {
       duration: 4000,
       position: 'top'
     })
-    let headers = new Headers({'Content-Type': 'application/json'})
-    let options = new RequestOptions({headers: headers})
+
     let body = {
       key: this.apiKey,
-      lang: this.nativeLanguage.substring(0,2) + '-' + this.languageSpoken.substring(0,2),
+      lang: this.languageSpoken.substring(0,2) + '-' + this.nativeLanguage.substring(0,2),
       text: this.translateValueTalk
     }
 
+    
+
     let url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${body.key}&lang=${body.lang}&text=${body.text}`;
+    console.log(url);
 
     this.http.get(url).map(res => res.json()).subscribe(data => {
       this.placeholderText = "Translated text here";

@@ -62,7 +62,21 @@
 
   <div class="margin-top-bot" *ngIf="talkIsActive">
     <h3>Speak a Message</h3>
-    <p>If you would first like to translate, select the language you want to translate to. Otherwise select the language to be spoken.</p>
+    <ion-list class="to-do-margin">
+      <ion-list-header class="no-border">
+        <h1>What does this section do?</h1>
+      </ion-list-header>
+      <ion-item><h1><b>Translation</b></h1>
+        <h2>Type words</h2>
+        <h2>Select language of text entered</h2>
+        <h2>Press <b>Translate</b></h2>
+      </ion-item>
+      <ion-item><h1><b>Text-To-Speech</b></h1> 
+        <h2>Simply enter the text you want to hear</h2>
+        <h2>Select language of text entered</h2>
+        <h2>Now press <b>Talk</b></h2>
+    </ion-item>
+    </ion-list>
     <ion-list>
       <ion-item>
         <ion-label floating>Text To Speak/Translate Here</ion-label>

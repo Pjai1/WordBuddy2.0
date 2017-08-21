@@ -42,9 +42,9 @@ export class SettingsPage implements OnInit{
 
     setNative() {
         let toast = this.toast.create({
-        message: "Native Language set, let's commence!",
-        duration: 3000,
-        position: 'bottom'
+            message: "Native Language set, let's commence!",
+            duration: 3000,
+            position: 'bottom'
         })
         this.globalVar.setNativeLanguage(this.nativeLang);
         this.nativeText = "Native Language: " + this.globalVar.getNativeLanguage();

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 declare var google;
 
@@ -17,7 +17,7 @@ export class DirectionsPage {
     directionsService = new google.maps.DirectionsService;
     directionsDisplay = new google.maps.DirectionsRenderer;
 
-    constructor(public geolocation: Geolocation, public navCtrl: NavController) {
+    constructor(public toast:ToastController, public geolocation: Geolocation, public navCtrl: NavController) {
             
     }
 
@@ -57,6 +57,11 @@ export class DirectionsPage {
       }
     
       calculateAndDisplayRoute() {
+        let toast = this.toast.create({
+            message: "Personal Location Added",
+            duration: 3000,
+            position: 'bottom'
+        })
         this.directionsService.route({
           origin: this.start,
           destination: this.end,
@@ -64,6 +69,7 @@ export class DirectionsPage {
         }, (response, status) => {
           if (status === 'OK') {
             this.directionsDisplay.setDirections(response);
+            toast.present();
           } else {
             window.alert('Directions request failed due to ' + status);
           }
@@ -71,17 +77,22 @@ export class DirectionsPage {
       }
 
       addMarker(){
+        let toast = this.toast.create({
+            message: "Personal Location Added",
+            duration: 3000,
+            position: 'bottom'
+        })
+
+        let marker = new google.maps.Marker({
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            position: this.map.getCenter()
+        });
         
-         let marker = new google.maps.Marker({
-           map: this.map,
-           animation: google.maps.Animation.DROP,
-           position: this.map.getCenter()
-         });
+        let content = "<h4>Your current location</h4>";          
         
-         let content = "<h4>Your current location</h4>";          
-        
-         this.addInfoWindow(marker, content);
-        
+        this.addInfoWindow(marker, content);
+        toast.present();
        }
 
        addInfoWindow(marker, content){
