@@ -58,7 +58,7 @@ export class DirectionsPage {
     
       calculateAndDisplayRoute() {
         let toast = this.toast.create({
-            message: "Personal Location Added",
+            message: "Route displayed",
             duration: 3000,
             position: 'bottom'
         })

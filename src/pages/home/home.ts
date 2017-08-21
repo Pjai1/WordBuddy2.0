@@ -39,6 +39,12 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.speechRecognition.requestPermission()
+    .then(
+      () => console.log('Granted'),
+      () => console.log('Denied')
+    )
+
     this.apiKey = "trnsl.1.1.20170728T225139Z.efa6a34c62ee4898.10ceed10c470fcfa598a82833f88de3f43e82224";
     this.placeholderText = "Text to translate here";
     if (this.globalVar.getNativeLanguage() === "") {
